@@ -11,10 +11,14 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+
 Route::get('/', function () {
-    return view('admin.templates.default');
+    return view('welcome');
 });
 
-Route::get('/users', function () {
-    return view('admin.users.index');
-});
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
